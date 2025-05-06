@@ -14,7 +14,7 @@ def load_data():
 df = load_data()
 
 # Set up user inputs and display
-st.title("NBA Player Similarity Finder")
+st.title("NBA Player Similarity Tool")
 player_options = sorted(df["PLAYER_NAME_STATS"].unique())
 selected_player = st.selectbox("Select a player", player_options)
 season_options = sorted(df[df["PLAYER_NAME_STATS"] == selected_player]["SEASON"].unique(), reverse=True)
