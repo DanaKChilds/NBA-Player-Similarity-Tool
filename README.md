@@ -1,4 +1,4 @@
-# NBA Player Similarity Finder
+# NBA Player Similarity Tool
 
 This project is an interactive web application built using **Streamlit** and **Flask** that allows users to find NBA players with similar statistical profiles. It combines player biographical information and performance data from the NBA API (1996–2024) and uses cosine similarity via scikit-learn to compare players based on per-game statistics.
 
@@ -57,8 +57,8 @@ Standard scaling is applied before fitting the model.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/DanaKChilds/NBA-Player-Similarity.git
-cd NBA-Player-Similarity
+git clone https://github.com/DanaKChilds/NBA-Player-Similarity-Tool.git
+cd NBA-Player-Similarity-Tool
 ```
 
 ### 2. Create a virtual environment (recommended)
