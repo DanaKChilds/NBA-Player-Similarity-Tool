@@ -1,2 +1,3 @@
-# Ignore Prefect blocks
 .prefect/
+nba_player_data.db
+data/
