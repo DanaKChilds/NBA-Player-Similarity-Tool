@@ -146,7 +146,7 @@ Leave this terminal running.
 $env:PREFECT_API_URL = "http://127.0.0.1:4200/api"
 ```
 
-### Step 4: Create a pull-based work pool
+### Step 4: Create a work pool
 
 ```bash
 prefect work-pool create --type process local-pool
