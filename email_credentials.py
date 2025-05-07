@@ -1,8 +1,8 @@
 """
 This script securely saves your email credentials for Prefect notifications.
 
-- Use a email address
-- Generate an **App Password** for this script (DO NOT use your main email password)
+- Use an email address
+- Generate an App Password for this script (DO NOT use your email password)
 - Run this script ONCE locally:
     python setup_email_credentials.py
 """
@@ -11,7 +11,7 @@ from prefect_email import EmailServerCredentials
 
 # UPDATE THESE WITH YOUR OWN INFO
 your_email = "youremail@gmail.com"         # Your email address
-your_app_password = "your_app_password"    # Use an App Password, NOT your main password
+your_app_password = "your_app_password"    # Use an App Password, NOT your email password
 
 # Save credentials securely to Prefect's local block store
 credentials = EmailServerCredentials(
