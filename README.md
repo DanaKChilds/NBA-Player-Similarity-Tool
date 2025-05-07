@@ -201,7 +201,7 @@ curl -X POST http://localhost:5000/similar_players   -H "Content-Type: applicati
 
 ## Deployment Options
 
-- Host the Streamlit frontend on Streamlit Cloud and host Flask backend on Render, Heroku, or other PaaS
+- Host the Streamlit frontend on Streamlit Cloud and host Flask backend on Render or Heroku.
 - Merge backend logic into Streamlit for unified deployment
 
 ## Acknowledgments
