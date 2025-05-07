@@ -7,3 +7,5 @@ matplotlib
 seaborn
 flask
 pytest
+prefect 
+prefect-email

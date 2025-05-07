@@ -1,14 +1,18 @@
 # Import necessary libraries
 from flask import Flask, request, jsonify
 import pandas as pd
+import sqlite3
 # Import model from model.py
 from model import PlayerSimilarityModel, FEATURE_COLS
 
 # Initialize Flask
 app = Flask(__name__)
 
-# Load data and model
-df = pd.read_csv("data/nba_combined_stats_bios_1996_2024.csv")
+# Load data from SQLite database and model
+conn = sqlite3.connect("nba_player_data.db")
+df = pd.read_sql("SELECT * FROM player_stats", conn)
+conn.close()
+
 model = PlayerSimilarityModel(df, FEATURE_COLS)
 
 # Definel API endpoint

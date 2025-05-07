@@ -2,13 +2,17 @@
 import streamlit as st
 import pandas as pd
 import requests
+import sqlite3
 # Import model from model.py
 from model import FEATURE_COLS, DISPLAY_LABELS, add_headshot_column
 
 # Cache loading of CSV file
 @st.cache_data
 def load_data():
-    return pd.read_csv("data/nba_combined_stats_bios_1996_2024.csv")
+    conn = sqlite3.connect("nba_player_data.db")
+    df = pd.read_sql("SELECT * FROM player_stats", conn)
+    conn.close()
+    return df
 
 # Load player data
 df = load_data()

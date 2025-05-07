@@ -26,20 +26,19 @@ Data is gathered from the [`nba_api`](https://github.com/swar/nba_api) and cover
 
 ### ETL Pipeline
 
-The data pipeline is automated via etl.py, which:
-
-Iterates over NBA seasons from 1996–2024
-
-Retrieves per-game player statistics and bio info via the nba_api
-
-Joins the two datasets on PLAYER_ID
-
-Outputs a single, clean CSV for modeling:
+- The data pipeline is automated via etl.py, which:
+- Iterates over NBA seasons from 1996–2024
+- Retrieves per-game player statistics and bio info via the nba_api
+- Joins the two datasets on PLAYER_ID
+- Outputs a clean dataset as both:
 ```text
 data/nba_combined_stats_bios_1996_2024.csv
-```
 
-Error handling is included to skip over unavailable player records. This ETL script can be run as a scheduled job or on-demand.
+nba_player_data.db (SQLite database, table: player_stats)
+```
+- Error handling is included to skip over unavailable player records. This ETL script can be run as a scheduled job or on-demand.
+
+The transformed data is loaded into a SQLite database (nba_player_data.db), which is queried by both the Flask API and Streamlit app for analytics and visualization.
 
 ### Similarity Model
 
