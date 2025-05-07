@@ -30,10 +30,10 @@ The data pipeline is built using Prefect and is scheduled to run monthly via a l
 2. Retrieve per-game player statistics and bio info
 3. Join the two datasets on `PLAYER_ID`
 4. Output a clean dataset as:
-   - `data/nba_combined_stats_bios_1996_2024.csv`
    - `nba_player_data.db` (SQLite table: `player_stats`)
+   - `data/nba_combined_stats_bios_1996_2024.csv` (only for manual data inspection)
 
-Error handling is built in, and email alerts are sent using `prefect-email` if the ETL fails.
+Error handling is built into the pipeline.
 
 ### Similarity Model
 
@@ -97,7 +97,7 @@ streamlit run app.py
 
 Once the app is running:
 
-1. Use the dropdown menu to select a player from the dataset.
+1. Use the dropdown menu to select a player or type in a player's name.
 2. Choose a specific season for that player.
 3. Use the slider to select how many similar players to return (1–10).
 4. Click **"Find Similar Players"**.
@@ -105,13 +105,15 @@ Once the app is running:
    - The selected player's headshot, team, age, and stats
    - A list of most similar players with matching info and similarity scores
 
+Note: The App will not return a season from the selected player as a similar player.
+
 The Flask API must be running on port 5000 for the Streamlit app to work properly.
 
 ---
 
 ## Automating the ETL with Prefect (only if regular updates required, otherwise skip)
 
-### (Optional) Configure Email Alerts
+### Step 1: Configure Email Alerts
 
 Open `email_credentials.py` and replace the placeholder values with your actual email address and an app-specific password:
 
@@ -120,7 +122,7 @@ your_email = "youremail@gmail.com"
 your_app_password = "your_app_password"
 ```
 
-> **Note**: Use an app-specific password (e.g., from Gmail), not your regular login password.
+> Note: Use an app-specific password (e.g., from Gmail), not your regular email password.
 
 Then run the script to save the credentials securely:
 
@@ -130,7 +132,7 @@ python email_credentials.py
 
 This stores credentials as a Prefect block that the ETL pipeline can access.
 
-### Step 1: Start the local Prefect server
+### Step 2: Start the local Prefect server
 
 ```bash
 prefect server start
@@ -138,25 +140,25 @@ prefect server start
 
 Leave this terminal running.
 
-### Step 2: Set API URL (new terminal)
+### Step 3: Set API URL (new terminal)
 
 ```powershell
 $env:PREFECT_API_URL = "http://127.0.0.1:4200/api"
 ```
 
-### Step 3: Create a pull-based work pool
+### Step 4: Create a pull-based work pool
 
 ```bash
 prefect work-pool create --type process local-pool
 ```
 
-### Step 4: Deploy the ETL job
+### Step 5: Deploy the ETL job
 
 ```bash
 prefect deploy etl.py:nba_etl_pipeline --name "monthly-nba-etl" --cron "0 7 1 * *" --pool local-pool --work-queue default
 ```
 
-### Step 5: Start the worker in the project folder
+### Step 6: Start the worker in the project folder
 
 Be sure to start the worker from the project root (`NBA-Player-Similarity-Tool`) so output files are written to the correct location.
 
@@ -165,7 +167,7 @@ cd NBA-Player-Similarity-Tool
 prefect worker start -p local-pool -q default
 ```
 
-### Step 6: Test it manually (optional)
+### Step 7: Test it manually (optional)
 
 ```bash
 prefect deployment run "NBA ETL Pipeline/monthly-nba-etl"
