@@ -39,8 +39,8 @@ def send_failure_email():
     credentials = EmailServerCredentials.load("gmail-creds")
     email_send_message(
         email_to="your_email@example.com",
-        subject="🚨 NBA ETL Pipeline Failed",
-        msg="The NBA ETL pipeline failed to complete successfully.",
+        subject="NBA ETL Pipeline Failed",
+        msg="The NBA ETL pipeline failed to complete.",
         email_server_credentials=credentials
     )
 # Execute the ETL pipeline
@@ -51,13 +51,19 @@ def nba_etl_pipeline():
         for year in range(1996, 2024):
             season = f"{year}-{str(year + 1)[-2:]}"
             print(f"Processing {season}")
-            df = fetch_season_data(season)
-            if not df.empty:
-                all_data.append(df)
-            time.sleep(1)  # Respect rate limits
+            
+            season_data_task = fetch_season_data(season)
+            season_df = season_data_task.result()
 
-        if not all_data:
-            raise RuntimeError("No data collected — aborting pipeline.")
+            print(f"{season}: pulled {len(season_df)} rows")
+
+            if not season_df.empty:
+                all_data.append(season_df)
+            
+            time.sleep(1)  # To avoid hitting the API too quickly
+
+            if not all_data:
+                raise RuntimeError("No data collected — aborting pipeline.")
 
         combined = pd.concat(all_data, ignore_index=True)
         save_to_csv(combined)
