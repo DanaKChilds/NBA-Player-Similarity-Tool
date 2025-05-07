@@ -87,7 +87,7 @@ python etl.py
 python api.py
 ```
 
-### Step 2: Run the Streamlit App
+### Step 2: Run the Streamlit App (new terminal)
 
 ```bash
 streamlit run app.py
@@ -163,11 +163,12 @@ prefect deploy etl.py:nba_etl_pipeline --name "monthly-nba-etl" --cron "0 7 1 * 
 Be sure to start the worker from the project root (`NBA-Player-Similarity-Tool`) so output files are written to the correct location.
 
 ```bash
-cd NBA-Player-Similarity-Tool
 prefect worker start -p local-pool -q default
 ```
 
 ### Step 7: Test it manually (optional)
+
+In a new terminal run: 
 
 ```bash
 prefect deployment run "NBA ETL Pipeline/monthly-nba-etl"

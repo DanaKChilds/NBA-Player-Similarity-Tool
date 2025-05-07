@@ -52,19 +52,19 @@ def nba_etl_pipeline():
             season = f"{year}-{str(year + 1)[-2:]}"
             print(f"Processing {season}")
             
-            season_data_task = fetch_season_data(season)
-            season_df = season_data_task.result()
+            season_df = fetch_season_data(season)
 
             print(f"{season}: pulled {len(season_df)} rows")
 
             if not season_df.empty:
                 all_data.append(season_df)
             
-            time.sleep(1)  # To avoid hitting the API too quickly
+            time.sleep(1)  # To avoid rate limiting
 
-            if not all_data:
-                raise RuntimeError("No data collected — aborting pipeline.")
+        if not all_data:
+            raise RuntimeError("No data collected — aborting pipeline.")
 
+# Combine and save the data
         combined = pd.concat(all_data, ignore_index=True)
         save_to_csv(combined)
         save_to_sqlite(combined)
