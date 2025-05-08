@@ -157,6 +157,12 @@ prefect work-pool create --type process local-pool
 ```bash
 prefect deploy etl.py:nba_etl_pipeline --name "monthly-nba-etl" --cron "0 7 1 * *" --pool local-pool --work-queue default
 ```
+Note: When prompted: 
+
+``` bash
+? Your Prefect workers will need access to this flow's code in order to run it. Would you like your workers to pull your flow code from a remote storage location when running this flow? [y/n] 
+```
+Enter 'n' for no.
 
 ### Step 6: Start the worker in the project folder
 
