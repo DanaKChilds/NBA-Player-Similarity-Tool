@@ -15,7 +15,7 @@ This project is an interactive web application built using Streamlit and Flask t
 
 ### Data Source
 
-Data is gathered from the nba_api and covers:
+Data is gathered from the [nba_api]([url](https://github.com/swar/nba_api)) library developed by Swar and covers:
 
 - **Seasons**: 1996–2024
 - **Stats**: Points, rebounds, assists, blocks, steals, etc.
@@ -221,7 +221,7 @@ curl -X POST http://localhost:5000/similar_players   -H "Content-Type: applicati
 
 ## Acknowledgments
 
-- `nba_api` for player data
+- `nba_api` for player data developed by Swar
 - `cdn.nba.com` for player headshots
 
 ## License
