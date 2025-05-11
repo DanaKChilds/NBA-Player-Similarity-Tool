@@ -2,7 +2,7 @@
 
 This project is an interactive web application built using Streamlit and Flask that allows users to find NBA players with similar statistical profiles. It combines player biographical information and performance data from the NBA API (1996–2024) and uses cosine similarity via scikit-learn to compare players based on per-game statistics.
 
-This document contains instructions to run the model once as well as optional steps to automate the pipeline.
+This document contains instructions to run the application once as well as optional steps to automate the pipeline.
 
 ## Contents
 
