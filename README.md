@@ -146,7 +146,7 @@ Leave this terminal running.
 $env:PREFECT_API_URL = "http://127.0.0.1:4200/api"
 ```
 
-### Step 4: Create a pull-based work pool
+### Step 4: Create a work pool
 
 ```bash
 prefect work-pool create --type process local-pool
@@ -157,6 +157,12 @@ prefect work-pool create --type process local-pool
 ```bash
 prefect deploy etl.py:nba_etl_pipeline --name "monthly-nba-etl" --cron "0 7 1 * *" --pool local-pool --work-queue default
 ```
+Note: When prompted: 
+
+``` bash
+? Your Prefect workers will need access to this flow's code in order to run it. Would you like your workers to pull your flow code from a remote storage location when running this flow? [y/n] 
+```
+Enter 'n' for no.
 
 ### Step 6: Start the worker in the project folder
 
@@ -201,7 +207,7 @@ curl -X POST http://localhost:5000/similar_players   -H "Content-Type: applicati
 
 ## Deployment Options
 
-- Host the Streamlit frontend on Streamlit Cloud and host Flask backend on Render, Heroku, or other PaaS
+- Host the Streamlit frontend on Streamlit Cloud and host Flask backend on Render or Heroku.
 - Merge backend logic into Streamlit for unified deployment
 
 ## Acknowledgments
