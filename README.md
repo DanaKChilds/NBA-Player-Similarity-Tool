@@ -1,4 +1,3 @@
-
 # NBA Player Similarity Tool
 
 This project is an interactive web application built using Streamlit and Flask that allows users to find NBA players with similar statistical profiles. It combines player biographical information and performance data from the NBA API (1996–2024) and uses cosine similarity via scikit-learn to compare players based on per-game statistics.
@@ -46,10 +45,18 @@ Standard scaling is applied before fitting the model.
 
 ## Running Locally
 
+### Prerequsites
+
+- Python
+- pip
+- git
+
 ### 1. Clone the repository
 
 ```bash
 git clone https://github.com/DanaKChilds/NBA-Player-Similarity-Tool.git
+```
+```bash
 cd NBA-Player-Similarity-Tool
 ```
 
@@ -60,7 +67,8 @@ python -m venv venv
 
 # Activate:
 source venv/bin/activate      # macOS/Linux
-venv\Scripts\activate         # Windows
+venv\Scripts\activate         # Powershell
+venv/Scripts/activate         # Bash
 ```
 
 ### 3. Install dependencies
@@ -113,6 +121,8 @@ The Flask API must be running on port 5000 for the Streamlit app to work properl
 
 ## Automating the ETL with Prefect (only if regular updates required, otherwise skip)
 
+Note: Ensure you remain within your virtual environment throughout these steps. 
+
 ### Step 1: Configure Email Alerts
 
 Open `email_credentials.py` and replace the placeholder values with your actual email address and an app-specific password:
@@ -121,8 +131,7 @@ Open `email_credentials.py` and replace the placeholder values with your actual 
 your_email = "youremail@gmail.com"
 your_app_password = "your_app_password"
 ```
-
-> Note: Use an app-specific password (e.g., from Gmail), not your regular email password.
+> Note: Use an app-specific password, not your regular email password.
 
 Then run the script to save the credentials securely:
 
