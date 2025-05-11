@@ -7,5 +7,5 @@ matplotlib
 seaborn
 flask
 pytest
-prefect 
+prefect>=2.0,<3.0
 prefect-email
